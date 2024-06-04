@@ -13,7 +13,9 @@ public class MiniProjects {
 
         //problem4();
 
-        problem5();
+        //problem5();
+
+        problem6();
     }
 
     private static void problem1(){
@@ -85,7 +87,7 @@ public class MiniProjects {
         gallons = (((Math.pow(radius, 2) * Math.PI) * depth) * gallonsPerCf);
 
 
-        System.out.printf("Your well casing hold %f gallons. ", gallons);
+        System.out.printf("Your well casing hold %f gallons./n", gallons);
         
 
 
@@ -94,7 +96,7 @@ public class MiniProjects {
     }
 
     private static void problem5(){
-        int bmr;
+        Double bmr;
         System.out.print("What is your gender? (M/F): ");
         String gender = scnr.nextLine();
         System.out.print("What is you age?: ");
@@ -106,11 +108,49 @@ public class MiniProjects {
         System.out.print("What is your weight in pounds?: ");
         String weightStr = scnr.nextLine();
         Double weight = Double.parseDouble(weightStr);
+        int chocolate = 230;
 
-        if (gender == "M"){
+        if ((gender.toUpperCase()).equals("F")){
+            bmr = (655 +(4.3 * weight) + (4.7 * height) + (4.7 * age)); 
+            bmr = (bmr / chocolate);
+            System.out.printf(("If you eat only chocolate you can eat %.1f bars to maintain weight.\n"),bmr );
             
         }
+        else if ((gender.toUpperCase()).equals("M")){
+            bmr = (66 +(6.3 * weight) + (12.9 * height) + (6.8 * age)); 
+            bmr = (bmr / chocolate);
+            System.out.printf(("If you eat only chocolate you can eat %.1f bars to maintain weight.\n"),bmr );
 
+
+        }
+        else{
+            System.out.println("Not (M/F) please pick one of the two.");
+        }
+    }
+
+    private static void problem6(){
+        System.out.print("First string: ");
+        String str1 = scnr.nextLine();
+        System.out.print("Second string: ");
+        String str2 = scnr.nextLine();
+        System.out.print("Third string: ");
+        String str3 = scnr.nextLine();
+        int result1 = str1.compareTo(str2);
+        int result2; 
+        
+        
+        if (result1 > 0){
+            result2 = str2.compareTo(str3);
+            if (result2 > 0){
+                System.out.println(str2);
+            }
+        }
+        else{
+            result2 = str1.compareTo(str3);
+            if (result2 > 0){
+                System.out.println(str1);
+            }
+        }
 
     }
 }
