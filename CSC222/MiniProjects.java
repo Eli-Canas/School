@@ -108,7 +108,7 @@ public class MiniProjects {
         Double weight = Double.parseDouble(weightStr);
 
         if (gender == "M"){
-            
+            yes
         }
 
 
