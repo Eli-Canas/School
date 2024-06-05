@@ -15,7 +15,9 @@ public class MiniProjects {
 
         //problem5();
 
-        problem6();
+        //problem6();
+    
+        problem7();
     }
 
     private static void problem1(){
@@ -144,13 +146,50 @@ public class MiniProjects {
             if (result2 > 0){
                 System.out.println(str2);
             }
-        }
-        else{
-            result2 = str1.compareTo(str3);
-            if (result2 > 0){
-                System.out.println(str1);
+            else{
+                if (str1.compareTo(str3) > 0){
+                    System.out.println(str3);
+                }
+                else{
+                    System.out.println(str1);
+                }
             }
         }
-        asdasdasd
+        else{
+            result2 = str2.compareTo(str3);
+            if (result2 > 0){
+                if (str1.compareTo(str3) > 0){
+                    System.out.println(str1);
+                }
+                else{
+                    System.out.println(str3);
+                }
+            }
+            else{
+                System.out.println(str2);
+            }
+        }
+    }
+
+    private static void problem7(){
+        System.out.print("Enter a string: ");
+        String userInput = scnr.nextLine();
+        int index = userInput.length();
+        
+
+        if (userInput.endsWith("?")){
+            if (index % 2 == 0){
+                System.out.println("Yes.");
+            }
+            else{
+                System.out.println("No.");
+            }
+        }
+        else if (userInput.endsWith("!")){
+            System.out.println("Wow.");
+        }
+        else{
+            System.out.printf("You always say \"%s\".",userInput);
+        }
     }
 }
