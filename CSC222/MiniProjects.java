@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -17,7 +19,13 @@ public class MiniProjects {
 
         //problem6();
     
-        problem7();
+        //problem7();
+    
+        //problem8();
+    
+        //problem9();
+
+        problem10();
     }
 
     private static void problem1(){
@@ -99,8 +107,7 @@ public class MiniProjects {
 
     private static void problem5(){
         Double bmr;
-        System.out.print("What is your gender? (M/F): ");
-        String gender = scnr.nextLine();
+    
         System.out.print("What is you age?: ");
         String ageStr = scnr.nextLine();
         System.out.print("What is your height in inches?: ");
@@ -112,22 +119,15 @@ public class MiniProjects {
         Double weight = Double.parseDouble(weightStr);
         int chocolate = 230;
 
-        if ((gender.toUpperCase()).equals("F")){
-            bmr = (655 +(4.3 * weight) + (4.7 * height) + (4.7 * age)); 
-            bmr = (bmr / chocolate);
-            System.out.printf(("If you eat only chocolate you can eat %.1f bars to maintain weight.\n"),bmr );
-            
-        }
-        else if ((gender.toUpperCase()).equals("M")){
-            bmr = (66 +(6.3 * weight) + (12.9 * height) + (6.8 * age)); 
-            bmr = (bmr / chocolate);
-            System.out.printf(("If you eat only chocolate you can eat %.1f bars to maintain weight.\n"),bmr );
+       
+        bmr = (655 +(4.3 * weight) + (4.7 * height) + (4.7 * age)); 
+        bmr = (bmr / chocolate);
+        System.out.printf(("If you eat only chocolate you can eat %.1f bars to maintain weight as a Female.\n"),bmr );
+    
+        bmr = (66 +(6.3 * weight) + (12.9 * height) + (6.8 * age)); 
+        bmr = (bmr / chocolate);
+        System.out.printf(("If you eat only chocolate you can eat %.1f bars to maintain weight as a Male.\n"),bmr );
 
-
-        }
-        else{
-            System.out.println("Not (M/F) please pick one of the two.");
-        }
     }
 
     private static void problem6(){
@@ -191,5 +191,83 @@ public class MiniProjects {
         else{
             System.out.printf("You always say \"%s\".",userInput);
         }
+    }
+
+    private static void problem8(){
+        //Recive input from user
+        System.out.print("Please enter a date (Format MM/DD/YYYY)");
+        String date = scnr.nextLine();
+        //grab month integers
+        String monthStr;
+        if (date.startsWith("0")){
+            monthStr = date.substring(1, 2);
+        }
+        else{
+            monthStr = date.substring(0, 2);
+        }
+        int month = Integer.parseInt(monthStr);
+        //grab day integers
+        String dayStr = date.substring(2, 5);
+        int day = Integer.parseInt(dayStr);
+        //grab year integers
+        String yearStr = date.substring(6);
+        int year = Integer.parseInt(yearStr);
+        //create a array with months that have a certain amount of days
+        List<Integer> days31 = Arrays.asList(1, 3, 4, 7, 8, 10,12);
+        List<Integer> days30 = Arrays.asList(4, 6, 9, 11);
+        List<Integer> days28 = Arrays.asList(2);
+
+        //find out if date is valid
+
+        System.out.println(date);
+
+        /*if (month > 0 && month <=12){
+            if (days31.contains(month)){
+                if (day > 0 && day <= 31){
+                    System.out.println("Valid.");
+                }
+            }
+
+        }
+        else{
+            System.out.println("Date not vaild.");
+        }*/
+    }
+
+    private static void problem9(){
+        Double bmr;
+        System.out.print("What is your gender? (M/W): ");
+        String gender = scnr.nextLine();
+        System.out.print("What is you age?: ");
+        String ageStr = scnr.nextLine();
+        System.out.print("What is your height in inches?: ");
+        Double age = Double.parseDouble(ageStr);
+        String heightStr = scnr.nextLine();
+        Double height = Double.parseDouble(heightStr);
+        System.out.print("What is your weight in pounds?: ");
+        String weightStr = scnr.nextLine();
+        Double weight = Double.parseDouble(weightStr);
+        int chocolate = 230;
+
+        if ((gender.toUpperCase()).equals("W")){
+            bmr = (655 +(4.3 * weight) + (4.7 * height) + (4.7 * age)); 
+            bmr = (bmr / chocolate);
+            System.out.printf(("If you eat only chocolate you can eat %.1f bars to maintain weight.\n"),bmr );
+            
+        }
+        else if ((gender.toUpperCase()).equals("M")){
+            bmr = (66 +(6.3 * weight) + (12.9 * height) + (6.8 * age)); 
+            bmr = (bmr / chocolate);
+            System.out.printf(("If you eat only chocolate you can eat %.1f bars to maintain weight.\n"),bmr );
+
+
+        }
+        else{
+            System.out.println("Not (M/W) please pick one of the two.");
+        }
+    }
+    
+    private static void problem10(){
+        
     }
 }
