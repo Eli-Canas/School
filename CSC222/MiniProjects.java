@@ -1,6 +1,8 @@
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 
 public class MiniProjects {
@@ -21,11 +23,13 @@ public class MiniProjects {
     
         //problem7();
     
-        //problem8();
+        //problem8(); // couldnt get to work
     
         //problem9();
 
         problem10();
+
+        //problem11();
     }
 
     private static void problem1(){
@@ -267,7 +271,23 @@ public class MiniProjects {
         }
     }
     
-    private static void problem10(){
+    private static void problem10(){}
+
+    private static void problem11(){
+    
+         Set<Integer> winners = new HashSet<>();
+        while (winners.size() < 3) {
+            int num = (int) (Math.random() * 10) + 1;
+            winners.add(num);
+        }
         
+        System.out.println("The winners of the prizes are: ");
+        for (int winner : winners) {
+            System.out.println("Finalist " + winner);
+        }
     }
+
+    private static void problem12(){
+       
+    
 }
