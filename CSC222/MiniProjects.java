@@ -9,27 +9,27 @@ public class MiniProjects {
     private static Scanner scnr = new Scanner(System.in);
     public static void main(String [] args) {
         
-        //problem1();
+        problem1();
 
-        //problem2();
+        problem2();
 
-        //problem3();
+        problem3();
 
-        //problem4();
+        problem4();
 
-        //problem5();
+        problem5();
 
-        //problem6();
+        problem6();
     
-        //problem7();
+        problem7();
     
-        //problem8(); // couldnt get to work
+        problem8(); // couldnt get to work
     
-        //problem9();
+        problem9();
 
         problem10();
 
-        //problem11();
+        problem11();
     }
 
     private static void problem1(){
