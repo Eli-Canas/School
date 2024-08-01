@@ -290,4 +290,5 @@ public class MiniProjects {
     private static void problem12(){
        
     
+    }
 }
