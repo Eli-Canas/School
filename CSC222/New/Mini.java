@@ -370,18 +370,18 @@ public class Mini {
 
 // main just calls the helper
     public static void main(String[] args) {
-        combineStrings();
-        HateToLove();
-        MadLib();
-        WellCalculator();
+        //combineStrings();
+        //HateToLove();
+        //MadLib();
+        //WellCalculator();
         HarrisBenedict();
-        lexicographicOrder();
-        oneLiner();
-        date(); //Could not get fully working
-        CalorieCounting();
-        LetterShift();
-        Prizes();
-        ChocolateCoupon();
+        //lexicographicOrder();
+        //oneLiner();
+        //date(); //Could not get fully working
+        //CalorieCounting();
+        //LetterShift();
+        //Prizes();
+        //ChocolateCoupon();
     }
 }
 
