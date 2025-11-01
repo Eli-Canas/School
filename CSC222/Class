@@ -1,0 +1,127 @@
+public class Name {
+
+    // private instance variables
+    private String firstName;
+    private String middleName;
+    private String lastName;
+
+    // 1) No-arg constructor: initialize with random names
+    public Name() {
+        // you can adjust these lists as you like
+        String[] firsts = {"John", "Mary", "Ava", "Liam", "Olivia"};
+        String[] middles = {"Anne", "Grace", "Lee", "James", "Marie"};
+        String[] lasts = {"Smith", "Jones", "Washington", "Garcia", "Brown"};
+
+        int i = (int)(Math.random() * firsts.length);
+        int j = (int)(Math.random() * middles.length);
+        int k = (int)(Math.random() * lasts.length);
+
+        this.firstName = firsts[i];
+        this.middleName = middles[j];
+        this.lastName = lasts[k];
+    }
+
+    // 2) 3-arg constructor
+    public Name(String first, String middle, String last) {
+        this.firstName = first;
+        this.middleName = middle;
+        this.lastName = last;
+    }
+
+    // getters
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    // setters
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    // changeNameTo(String,String,String)
+    public void changeNameTo(String first, String middle, String last) {
+        this.firstName = first;
+        this.middleName = middle;
+        this.lastName = last;
+    }
+
+    /**
+     * mergeNames(Name other):
+     * Concatenate this last name + "-" + other last name
+     * and set BOTH objects' last names to the merged version.
+     */
+    public void mergeNames(Name other) {
+        if (other == null) {
+            return; // or throw IllegalArgumentException
+        }
+        String merged = this.lastName + "-" + other.lastName;
+        this.lastName = merged;
+        other.lastName = merged;
+    }
+
+    /**
+     * getFullName:
+     * returns "lastName, firstName, middleName"
+     */
+    public String getFullName() {
+        return lastName + ", " + firstName + ", " + middleName;
+    }
+
+    /**
+     * toString:
+     * returns "firstName middleName lastName"
+     * (no commas)
+     */
+    @Override
+    public String toString() {
+        return firstName + " " + middleName + " " + lastName;
+    }
+
+    /**
+     * equals(Name):
+     * returns true when first, middle, and last all match
+     */
+    public boolean equals(Name other) {
+        if (other == null) {
+            return false;
+        }
+        return this.firstName.equals(other.firstName)
+            && this.middleName.equals(other.middleName)
+            && this.lastName.equals(other.lastName);
+    }
+
+    // OPTIONAL: also override Object.equals(Object) so collections work:
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Name)) return false;
+        Name other = (Name) obj;
+        return this.equals(other);
+    }
+
+    @Override
+    public int hashCode() {
+        // good practice when overriding equals(Object)
+        int result = 17;
+        result = 31 * result + (firstName == null ? 0 : firstName.hashCode());
+        result = 31 * result + (middleName == null ? 0 : middleName.hashCode());
+        result = 31 * result + (lastName == null ? 0 : lastName.hashCode());
+        return result;
+    }
+}
