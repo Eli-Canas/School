@@ -1,0 +1,240 @@
+package carstuff;
+
+public class Car {
+
+    // ===== constants (car identity & optimal specs) =====
+    private String make;
+    private String model;
+    private String color;
+    private int year;
+    private double fuelTankSize;     // max gallons
+    private double bestFuelEconomy;  // mpg at optimal speed
+    private double optimalSpeed;     // mph at best mpg
+
+    // ===== changing state =====
+    private double odometer;         // total miles
+    private double tripOdometer;     // trip miles
+    private double fuelLevel;        // gallons currently in tank
+
+    // ===== trip setup (to be used by drive()) =====
+    private double tripDistance;     // miles to drive this trip
+    private double tripSpeed;        // mph to drive this trip
+
+    // ===== constants for fuel calculations =====
+    private static final double MIN_MPG = 2.0;   // don't get worse than 2 mpg
+    private static final double EPS = 0.1;       // for "close enough" fuel
+
+    // ----------------------------------------------------
+    // 1) no-arg constructor: random values
+    // ----------------------------------------------------
+    public Car() {
+        // realistic-ish randoms, following assignment ranges
+        this.year = 1920 + (int)(Math.random() * (2021 - 1920 + 1));
+        String[] makes = {"Ford","Chevrolet","Opel","Lotus","Honda","Toyota"};
+        String[] models = {"F150","Mustang","Evija","Civic","Corolla","Astra","SSR","El Camino"};
+        String[] colors = {"Red","Blue","Yellow","Green","Black","White","Magenta","Gold"};
+
+        this.make = makes[(int)(Math.random() * makes.length)];
+        this.model = models[(int)(Math.random() * models.length)];
+        this.color = colors[(int)(Math.random() * colors.length)];
+
+        // tank 8.0 – 34.99
+        this.fuelTankSize = 8.0 + (Math.random() * (34.99 - 8.0));
+        // fuel in tank: random 0 – tank
+        this.fuelLevel = Math.random() * this.fuelTankSize;
+        // odometer 0.0 – 5.99
+        this.odometer = Math.random() * 5.99;
+        // trip odo 0
+        this.tripOdometer = 0.0;
+        // mpg 15.0 – 54.99
+        this.bestFuelEconomy = 15.0 + (Math.random() * (54.99 - 15.0));
+        // optimal speed 45.0 – 64.99
+        this.optimalSpeed = 45.0 + (Math.random() * (64.99 - 45.0));
+        // no trip set yet
+        this.tripDistance = 0.0;
+        this.tripSpeed = this.optimalSpeed;
+    }
+
+    // ----------------------------------------------------
+    // 2) full constructor (make, model, color, year, tank, mpg, bestSpeed)
+    //    NOTE: assignment’s parameter order is slightly awkward in the doc,
+    //    so keep this exact order and match it in the driver.
+    // ----------------------------------------------------
+    public Car(String make, String model, String color,
+               int year, double tankSize,
+               double fuelEconomy, double bestSpeed) {
+
+        this.make = make;
+        this.model = model;
+        this.color = color;
+        this.year = year;
+        this.fuelTankSize = tankSize;
+        this.bestFuelEconomy = fuelEconomy;
+        this.optimalSpeed = bestSpeed;
+
+        // odometer 0–5.99; trip 0; fuel random 0–tank
+        this.odometer = Math.random() * 5.99;
+        this.tripOdometer = 0.0;
+        this.fuelLevel = Math.random() * this.fuelTankSize;
+        this.tripDistance = 0.0;
+        this.tripSpeed = this.optimalSpeed;
+    }
+
+    // ----------------------------------------------------
+    // public addFuelToTank(double): double
+    //  - returns:
+    //      < 0 : tank can still take -return gallons
+    //      > 0 : leftover fuel you didn’t fit
+    //      ==0: it fit exactly
+    // ----------------------------------------------------
+    public double addFuelToTank(double fuelToAdd) {
+        if (fuelToAdd <= 0) return 0.0;
+
+        double spaceLeft = fuelTankSize - fuelLevel;
+        double newLevel = fuelLevel + fuelToAdd;
+
+        if (Math.abs(newLevel - fuelTankSize) <= EPS) {
+            // close enough to full
+            fuelLevel = fuelTankSize;
+            return 0.0;
+        } else if (newLevel < fuelTankSize) {
+            // still room left
+            fuelLevel = newLevel;
+            return -(fuelTankSize - fuelLevel);  // negative means you can still add this much
+        } else {
+            // too much fuel, fill and return leftover
+            fuelLevel = fuelTankSize;
+            double leftover = newLevel - fuelTankSize;
+            return leftover;
+        }
+    }
+
+    // ----------------------------------------------------
+    // toString(): "year, color, make, model, with X gallons..., Y miles..."
+    // ----------------------------------------------------
+    @Override
+    public String toString() {
+        return String.format("%d, %s, %s, %s, with %.2f gallons of gas in the tank, %.2f miles on the odometer, and %.2f miles on the trip odometer.",
+                year, color, make, model, fuelLevel, odometer, tripOdometer);
+    }
+
+    // ----------------------------------------------------
+    // equals(Car): true if year, make, model same
+    // ----------------------------------------------------
+    public boolean equals(Car other) {
+        if (other == null) return false;
+        return this.year == other.year
+                && this.make.equals(other.make)
+                && this.model.equals(other.model);
+    }
+
+    // ----------------------------------------------------
+    // setUpTrip(double speed, double distance)
+    // (the doc flips the order in a few places; we’ll do speed, distance
+    //  but the driver can call in either order if you overload)
+    // ----------------------------------------------------
+    public void setUpTrip(double speed, double distance) {
+        this.tripSpeed = speed;
+        this.tripDistance = distance;
+    }
+
+    // convenience: matches the algorithm wording (distance, speed)
+    public void setUpTripDistanceFirst(double distance, double speed) {
+        this.tripSpeed = speed;
+        this.tripDistance = distance;
+    }
+
+    // ----------------------------------------------------
+    // driveCar():boolean   (name from spec)
+    // also expose drive() to match teacher driver wording
+    // ----------------------------------------------------
+    public boolean driveCar() {
+        return doDrive();
+    }
+
+    public boolean drive() {
+        return doDrive();
+    }
+
+    // ----------------------------------------------------
+    // core drive logic
+    // ----------------------------------------------------
+    private boolean doDrive() {
+        double distanceToGo = this.tripDistance;
+        double speedToUse = this.tripSpeed;
+
+        if (distanceToGo <= 0 || speedToUse <= 0) {
+            // nothing to do
+            this.tripDistance = 0;
+            this.tripSpeed = 0;
+            return true;
+        }
+
+        // figure mpg for this speed
+        double mpg = calculateMpgForSpeed(speedToUse);
+
+        // gallons needed
+        double gallonsNeeded = distanceToGo / mpg;
+
+        if (gallonsNeeded <= fuelLevel + EPS) {
+            // we can complete the trip
+            fuelLevel -= gallonsNeeded;
+            odometer += distanceToGo;
+            tripOdometer += distanceToGo;
+            // reset trip info
+            this.tripDistance = 0;
+            this.tripSpeed = 0;
+            return true;
+        } else {
+            // we run out before completing
+            double milesPossible = fuelLevel * mpg;
+            odometer += milesPossible;
+            tripOdometer += milesPossible;
+            fuelLevel = 0.0;
+            this.tripDistance = 0;
+            this.tripSpeed = 0;
+            return false;
+        }
+    }
+
+    // ----------------------------------------------------
+    // piecewise-ish mpg calc: best at optimal, worse as we move away
+    // ----------------------------------------------------
+    private double calculateMpgForSpeed(double speed) {
+        if (speed <= 0) return MIN_MPG;
+        double diff = Math.abs(speed - optimalSpeed);
+        double factor = diff / optimalSpeed; // how far off we are, 0 .. ~1+
+        double penalty = bestFuelEconomy * 0.5 * factor; // up to 50% worse if way off
+        double mpg = bestFuelEconomy - penalty;
+        if (mpg < MIN_MPG) mpg = MIN_MPG;
+        return mpg;
+    }
+
+    // ----------------------------------------------------
+    // other getters/setters required
+    // ----------------------------------------------------
+    public double getTripOdometer() {
+        return Math.round(tripOdometer * 10.0) / 10.0;
+    }
+
+    public void clearTripOdometer() {
+        this.tripOdometer = 0.0;
+    }
+
+    public double getOdometer() {
+        return Math.round(odometer * 10.0) / 10.0;
+    }
+
+    public double getFuelLevel() {
+        return fuelLevel;
+    }
+
+    public double getFuelTankSize() {
+        return fuelTankSize;
+    }
+
+    public String getMake() { return make; }
+    public String getModel() { return model; }
+    public String getColor() { return color; }
+    public int getYear() { return year; }
+}
