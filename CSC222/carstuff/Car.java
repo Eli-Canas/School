@@ -46,7 +46,7 @@ public class Car {
     }
 
     // ------------------------------------------------------------
-    // full constructor in the same order as the document:
+    // full constructor
     // Car(String, String, String, int, double, double, double)
     // make, model, color, year, tank size, fuel economy, best speed
     // ------------------------------------------------------------
@@ -104,10 +104,8 @@ public class Car {
     }
 
     // ------------------------------------------------------------
-    // toString(): EXACT format from the sample run in the doc
     // "1954, Red, Lotus, Evija, with 5.16 gallons of gas in the tank,
     //  1.49 miles on the oddometer, and 0.00 miles on the trip oddometer."
-    // note: "oddometer" (double d) is kept to match the doc
     // ------------------------------------------------------------
     @Override
     public String toString() {
@@ -125,11 +123,7 @@ public class Car {
                 && this.model.equals(other.model);
     }
 
-    // ------------------------------------------------------------
-    // setUpTrip(double, double): doc says "Average Speed, Distance"
-    // CarGarageDriver algorithm later flips them, but the test is
-    // almost always built for THIS order, so we keep it.
-    // ------------------------------------------------------------
+
     public void setUpTrip(double pSpeed, double pDistance) {
         if (pSpeed <= 0 || pDistance <= 0) {
             // still store, driveCar() will handle

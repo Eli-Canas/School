@@ -62,8 +62,8 @@ public class CarGarageDriver {
                         System.out.println("How fast would you like to drive?\nPlease enter an amount greater than zero.");
                         double spd = getPositiveDouble(in);
 
-                        // document's algorithm actually calls setUpTrip(distance, speed)
-                        car.setUpTrip(spd, dist); // we wrote (speed, distance); this matches our Car
+                       
+                        car.setUpTrip(spd, dist); 
                         boolean back = car.driveCar();
                         if (back) {
                             System.out.printf("You drove the %d, %s, %s %.2f miles and returned it to its parking space.%n",
@@ -96,7 +96,8 @@ public class CarGarageDriver {
                             double optimal = getDoubleInRange(in, "Input the car's optimal driving speed for best mileage.\nPlease enter a value between 45.0 and 64.99.", 45.0, 64.99);
                             double mpg = getDoubleInRange(in, "Input the car's fuel economy.\nPlease enter a value between 15.0 and 54.99.", 15.0, 54.99);
                             newCar = new Car(make, model, color, year, tank, mpg, optimal);
-                        } else {
+                        } 
+                        else {
                             newCar = new Car();
                         }
                         if (!garage.parkCar(newCar)) {
