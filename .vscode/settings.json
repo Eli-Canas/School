@@ -1,8 +1,0 @@
-{
-    "java.debug.settings.onBuildFailureProceed": true,
-    "java.project.sourcePaths": [
-        "CSC222",
-        "carstuff/car"
-    ],
-    "java.project.referencedLibraries": []
-}
