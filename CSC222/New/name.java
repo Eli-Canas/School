@@ -1,3 +1,4 @@
+package New;
 import java.util.Random;
 
 public class Name {
