@@ -1,3 +1,6 @@
+package GCF;
+
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,9 +23,8 @@ public class EvaluateGCFAlgorithm {
                 {2, 6},
                 {200, 1},
                 {48, 180},
-                {270, 192},
-                {12345, 54321},
-                {99991, 99989}
+                {200, 855}
+                
         };
 
         StringBuilder out = new StringBuilder();
