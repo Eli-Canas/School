@@ -132,27 +132,27 @@ public class EliCanasTriangleTest {
 	}//end test
 	
 	
-	@Test
-	public void test18(){
-		Triangle triangle = new Triangle("0","0","0");
-		assertEquals("Not a valid triangle!\n", triangle.triangleType());
-	}//end test	
-	
-	
-	@Test
-	public void test19(){
-		Triangle triangle = new Triangle("x","-5","2000");
-		assertEquals(
-			"The side 1 is not an integer number.\n\n" +
-			"At least one side is negative!\n" +
-			"Not a valid triangle!\n" +
-			"This triangle is too big.\n",
-			triangle.triangleType()
-		);
-	}//end test
-	
-	@Test
-	public void test20(){
-		Triangle triangle = new Triangle("1000","1","1");
-		assertEquals("Not a valid triangle!\nThis triangle is too big.\n", triangle.triangleType());
-	}//end test
+	 @Test
+    public void test18(){
+        Triangle triangle = new Triangle("0","0","0");
+        assertEquals("Not a valid triangle!\n", triangle.triangleType());
+    }
+
+    @Test
+    public void test19(){
+        Triangle triangle = new Triangle("x","-5","2000");
+        assertEquals(
+                "The side 1 is not an integer number.\n\n" +
+                "At least one side is negative!\n" +
+                "Not a valid triangle!\n" +
+                "This triangle is too big.\n",
+                triangle.triangleType()
+        );
+    }
+
+    @Test
+    public void test20(){
+        Triangle triangle = new Triangle("1000","1","1");
+        assertEquals("Not a valid triangle!\nThis triangle is too big.\n", triangle.triangleType());
+    }
+}
